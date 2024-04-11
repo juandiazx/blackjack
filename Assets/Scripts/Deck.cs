@@ -96,10 +96,19 @@ public class Deck : MonoBehaviour
         {
             PushPlayer();
             PushDealer();
-            /*TODO:
-             * Si alguno de los dos obtiene Blackjack, termina el juego y mostramos mensaje
-             */
+            
         }
+        if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21) return;
+        
+        string quien = "Dealer";
+
+        if (player.GetComponent<CardHand>().points == 21){
+            quien = "Jugador";
+        }
+            finalMessage.text = "El " + quien+ " ha hecho Blackjack";
+            hitButton.interactable = false;
+            stickButton.interactable = false;
+            dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
     }
 
     private void CalculateProbabilities()
