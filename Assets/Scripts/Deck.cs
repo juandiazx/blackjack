@@ -34,6 +34,8 @@ public class Deck : MonoBehaviour
        
     private void Awake()
     {    
+        hitButton.interactable = false;
+        stickButton.interactable = false;
         InitCardValues();        
 
     }
