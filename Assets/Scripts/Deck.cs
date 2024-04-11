@@ -98,7 +98,13 @@ public class Deck : MonoBehaviour
             PushDealer();
             
         }
-        if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21) return;
+        if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21)
+        {
+            hitButton.interactable = true;
+            stickButton.interactable = true;
+            playAgainButton.interactable = false;
+            return;
+        }
         
         string quien = "Dealer";
 
