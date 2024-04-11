@@ -101,7 +101,9 @@ public class Deck : MonoBehaviour
 
         if (player.GetComponent<CardHand>().points == 21){
             quien = "Jugador";
+            creditoApostado = -creditoApostado;
         }
+            creditoBanco -= creditoApostado;
             finalMessage.text = "El " + quien+ " ha hecho Blackjack, gana la partida";
             inhabilitarBotonesInteraccion();
             mostrarDealer();
@@ -189,7 +191,7 @@ public class Deck : MonoBehaviour
             PushDealer();
         }
         mostrarDealer();
-        
+
         if (dealer.GetComponent<CardHand>().points > 21)
         {
             finalMessage.text = "El Dealer ha perdido, gana el Jugador";
