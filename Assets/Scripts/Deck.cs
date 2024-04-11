@@ -67,7 +67,6 @@ public class Deck : MonoBehaviour
             }
             values[i] = valor;
         }
-        Debug.Log("Valores de las cartas inicializados" + string.Join(", ", values));
     }
 
     private void ShuffleCards()
@@ -88,7 +87,6 @@ public class Deck : MonoBehaviour
             values[k] = values[n];
             values[n] = tempValue;
         }
-        Debug.Log("Valores ordenados" + string.Join(", ", values));
     }
 
 
