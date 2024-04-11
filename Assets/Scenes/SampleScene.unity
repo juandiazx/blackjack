@@ -274,15 +274,13 @@ MonoBehaviour:
   stickButton: {fileID: 2074924244}
   playAgainButton: {fileID: 495796953}
   finalMessage: {fileID: 1167008771}
-  playerBlackjack: {fileID: 0}
-  dealerBlackjack: {fileID: 0}
-  playerPuntuacion: {fileID: 0}
-  dealerPuntuacion: {fileID: 0}
+  playerPuntuacion: {fileID: 1735581384}
+  dealerPuntuacion: {fileID: 692146450}
   apostarDropdown: {fileID: 0}
-  credito: {fileID: 0}
-  probMore: {fileID: 0}
-  probGood: {fileID: 0}
-  probDealer: {fileID: 0}
+  credito: {fileID: 248877182}
+  probMore: {fileID: 1012088469}
+  probGood: {fileID: 2002327987}
+  probDealer: {fileID: 2128105681}
   values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &135558636
 GameObject:
@@ -1501,7 +1499,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 
 --- !u!222 &692146451
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2321,6 +2319,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 482502276}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1012088469 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1425109657209639717, guid: 8763bf09bdefc16448fbdc7a0aa1ff18,
+    type: 3}
+  m_PrefabInstance: {fileID: 482502276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1027253948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2855,7 +2865,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 113795716}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1231542737
 MonoBehaviour:
@@ -2965,7 +2987,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play Again
+  m_Text: Play
 --- !u!222 &1397052297
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3670,6 +3692,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 599376577}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2002327987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1862494187205898055, guid: a0e6707bce429e94b95b19bfd8ba70fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 599376577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2032017422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3888,6 +3922,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1027253948}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2128105681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7984125123408681854, guid: 8f9c7db511a4a1f429e42fce7675f3e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1027253948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
