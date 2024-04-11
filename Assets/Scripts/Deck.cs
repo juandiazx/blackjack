@@ -191,4 +191,22 @@ public class Deck : MonoBehaviour
     {
 
     }
+
+    private void inhabilitarBotonesInteraccion()
+    {
+        hitButton.interactable = false;
+        stickButton.interactable = false;
+        playAgainButton.interactable = true;
+    }
+    private void habilitarBotonesInteraccion()
+    {
+        hitButton.interactable = true;
+        stickButton.interactable = true;
+        playAgainButton.interactable = false;
+    }
+    private void mostrarDealer()
+    {
+        dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
+        dealerPuntuacion.text = dealer.GetComponent<CardHand>().points.ToString();
+    }
 }
