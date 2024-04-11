@@ -11,10 +11,6 @@ public class Deck : MonoBehaviour
     public Button playAgainButton;
     public Text finalMessage;
 
-    //Textos para cuando sea Blackjack
-    public Text playerBlackjack;
-    public Text dealerBlackjack;
-
     public Text playerPuntuacion;
     public Text dealerPuntuacion;
     public Dropdown apostarDropdown;
@@ -34,10 +30,8 @@ public class Deck : MonoBehaviour
        
     private void Awake()
     {    
-        hitButton.interactable = false;
-        stickButton.interactable = false;
+        inhabilitarBotonesInteraccion();
         InitCardValues();        
-
     }
 
     private void Start()
@@ -99,9 +93,8 @@ public class Deck : MonoBehaviour
         }
         if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21)
         {
-            hitButton.interactable = true;
-            stickButton.interactable = true;
-            playAgainButton.interactable = false;
+            habilitarBotonesInteraccion();
+            playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
             return;
         }
         
@@ -110,10 +103,9 @@ public class Deck : MonoBehaviour
         if (player.GetComponent<CardHand>().points == 21){
             quien = "Jugador";
         }
-            finalMessage.text = "El " + quien+ " ha hecho Blackjack";
-            hitButton.interactable = false;
-            stickButton.interactable = false;
-            dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
+            finalMessage.text = "El " + quien+ " ha hecho Blackjack, gana la partida";
+            inhabilitarBotonesInteraccion();
+            mostrarDealer();
     }
 
     private void CalculateProbabilities()
@@ -176,8 +168,7 @@ public class Deck : MonoBehaviour
 
     public void PlayAgain()
     {
-        hitButton.interactable = true;
-        stickButton.interactable = true;
+        habilitarBotonesInteraccion();
         finalMessage.text = "";
         player.GetComponent<CardHand>().Clear();
         dealer.GetComponent<CardHand>().Clear();          
