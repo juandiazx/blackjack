@@ -101,9 +101,8 @@ public class Deck : MonoBehaviour
 
         if (player.GetComponent<CardHand>().points == 21){
             quien = "Jugador";
-            creditoApostado = -creditoApostado;
+            creditoBanco += 2 * creditoApostado;
         }
-            creditoBanco -= creditoApostado;
             finalMessage.text = "El " + quien+ " ha hecho Blackjack, gana la partida";
             inhabilitarBotonesInteraccion();
             mostrarDealer();
@@ -169,14 +168,13 @@ public class Deck : MonoBehaviour
         if (player.GetComponent<CardHand>().points > 21)
         {
             finalMessage.text = "El Jugador ha perdido, gana el Dealer";       
-            creditoBanco -= creditoApostado;
             inhabilitarBotonesInteraccion();
             mostrarDealer();
         }
         if (player.GetComponent<CardHand>().points == 21)
         {
             finalMessage.text = "El Jugador ha hecho Blackjack, gana la partida";
-            creditoBanco += creditoApostado;
+            creditoBanco += 2 * creditoApostado;
             inhabilitarBotonesInteraccion();
             mostrarDealer();
         }
@@ -195,7 +193,7 @@ public class Deck : MonoBehaviour
         if (dealer.GetComponent<CardHand>().points > 21)
         {
             finalMessage.text = "El Dealer ha perdido, gana el Jugador";
-            creditoBanco += creditoApostado;
+            creditoBanco += 2 * creditoApostado;
         }
         else
         {
@@ -205,12 +203,11 @@ public class Deck : MonoBehaviour
             if (player.GetComponent<CardHand>().points > dealer.GetComponent<CardHand>().points)
             {
                 finalMessage.text = "El Jugador gana la partida";
-                creditoBanco += creditoApostado;
+                creditoBanco += 2 * creditoApostado;
             }
             else if (playerScore < dealerScore)
             {
                 finalMessage.text = "El Dealer gana la partida";
-                creditoBanco -= creditoApostado;
             }
             else
             {
