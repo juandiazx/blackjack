@@ -183,6 +183,8 @@ public class Deck : MonoBehaviour
     {
         habilitarBotonesInteraccion();
         finalMessage.text = "";
+        playerPuntuacion.text = "";
+        dealerPuntuacion.text = "";
         player.GetComponent<CardHand>().Clear();
         dealer.GetComponent<CardHand>().Clear();          
         cardIndex = 0;
