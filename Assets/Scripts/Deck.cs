@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
@@ -52,7 +52,7 @@ public class Deck : MonoBehaviour
             switch (i % 13)
             {
                 case 0: // As
-                    valor = 1;
+                    valor = 11;
                     break;
                 case 10: // J
                 case 11: // Q
