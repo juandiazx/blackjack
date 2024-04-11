@@ -146,9 +146,22 @@ public class Deck : MonoBehaviour
         //Repartimos carta al jugador
         PushPlayer();
 
-        /*TODO:
-         * Comprobamos si el jugador ya ha perdido y mostramos mensaje
-         */      
+        if (player.GetComponent<CardHand>().points > 21)
+        {
+            finalMessage.text = "El Jugador ha perdido";       
+            creditoBanco -= creditoApostado;
+            inhabilitarBotonesInteraccion();
+            mostrarDealer();
+        }
+        if (player.GetComponent<CardHand>().points == 21)
+        {
+            finalMessage.text = "El Jugador ha hecho Blackjack, gana la partida";
+            creditoBanco += creditoApostado;
+            inhabilitarBotonesInteraccion();
+            mostrarDealer();
+        }
+        playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
+        CalculateProbabilities(); 
 
     }
 
