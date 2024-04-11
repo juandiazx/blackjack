@@ -148,7 +148,7 @@ public class Deck : MonoBehaviour
 
         if (player.GetComponent<CardHand>().points > 21)
         {
-            finalMessage.text = "El Jugador ha perdido";       
+            finalMessage.text = "El Jugador ha perdido, gana el Dealer";       
             creditoBanco -= creditoApostado;
             inhabilitarBotonesInteraccion();
             mostrarDealer();
