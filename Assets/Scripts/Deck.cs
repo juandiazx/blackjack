@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
@@ -172,4 +172,8 @@ public class Deck : MonoBehaviour
         StartGame();
     }
     
+    public void ApostarCreditos()
+    {
+
+    }
 }
