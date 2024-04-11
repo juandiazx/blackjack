@@ -110,28 +110,52 @@ public class Deck : MonoBehaviour
 
     private void CalculateProbabilities()
     {
-        /*TODO:
-         * Calcular las probabilidades de:
-         * - Teniendo la carta oculta, probabilidad de que el dealer tenga más puntuación que el jugador
-         * - Probabilidad de que el jugador obtenga entre un 17 y un 21 si pide una carta
-         * - Probabilidad de que el jugador obtenga más de 21 si pide una carta          
-         */
+        CardHand playerHand = player.GetComponent<CardHand>();
+        CardHand dealerHand = dealer.GetComponent<CardHand>();
+
+        int playerScore = playerHand.points;
+        int dealerScore = dealerHand.points;
+
+        // Calcular la probabilidad de que el crupier tenga una puntuación mayor que la del jugador
+        // Esto implica tener en cuenta la carta oculta del crupier y las cartas del jugador
+        // Si el jugador tiene Blackjack, la probabilidad es 0, ya que ganaría automáticamente
+        float probDealerWin = 0f;
+        if (playerScore != 21)
+        {
+            // Lógica para calcular la probabilidad
+        }
+
+        // Calcular la probabilidad de que el jugador obtenga una puntuación entre 17 y 21 si pide una carta adicional
+        // Esto implica tener en cuenta las cartas actuales del jugador y las posibles cartas adicionales
+        float probPlayerGood = 0f;
+        // Lógica para calcular la probabilidad
+
+        // Calcular la probabilidad de que el jugador supere los 21 puntos si pide una carta adicional
+        // Esto implica tener en cuenta las cartas actuales del jugador y las posibles cartas adicionales
+        float probPlayerBust = 0f;
+        // Lógica para calcular la probabilidad
+
+        // Actualizar los textos de probabilidades en la interfaz de usuario
+        UpdateProbabilityUI(probDealerWin, probPlayerGood, probPlayerBust);
     }
+
+    private void UpdateProbabilityUI(float probDealerWin, float probPlayerGood, float probPlayerBust)
+    {
+        // Actualizar los textos de las probabilidades en la interfaz de usuario con los valores calculados
+        probDealer.text = (probDealerWin * 100).ToString("F2") + "%";
+        probGood.text = (probPlayerGood * 100).ToString("F2") + "%";
+        probMore.text = (probPlayerBust * 100).ToString("F2") + "%";
+    }
+
 
     void PushDealer()
     {
-        /*TODO:
-         * Dependiendo de cómo se implemente ShuffleCards, es posible que haya que cambiar el índice.
-         */
         dealer.GetComponent<CardHand>().Push(faces[cardIndex],values[cardIndex]);
         cardIndex++;        
     }
 
     void PushPlayer()
     {
-        /*TODO:
-         * Dependiendo de cómo se implemente ShuffleCards, es posible que haya que cambiar el índice.
-         */
         player.GetComponent<CardHand>().Push(faces[cardIndex], values[cardIndex]/*,cardCopy*/);
         cardIndex++;
         CalculateProbabilities();
@@ -139,11 +163,6 @@ public class Deck : MonoBehaviour
 
     public void Hit()
     {
-        /*TODO: 
-         * Si estamos en la mano inicial, debemos voltear la primera carta del dealer.
-         */
-        
-        //Repartimos carta al jugador
         PushPlayer();
 
         if (player.GetComponent<CardHand>().points > 21)
