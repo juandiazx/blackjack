@@ -71,21 +71,20 @@ public class Deck : MonoBehaviour
 
     private void ShuffleCards()
     {
-        int n = faces.Length;
         Sprite tempFace;
         int tempValue;
-        while (n > 1)
+
+        for (int i = 51; i >= 0; i--)
         {
-            n--;
-            int k = UnityEngine.Random.Range(0, n + 1);
+            int k = UnityEngine.Random.Range(0,52);
             // Intercambiamos la carta en la posición k con la carta en la posición n
             tempFace = faces[k];
-            faces[k] = faces[n];
-            faces[n] = tempFace;
+            faces[k] = faces[i];
+            faces[i] = tempFace;
 
             tempValue = values[k];
-            values[k] = values[n];
-            values[n] = tempValue;
+            values[k] = values[i];
+            values[i] = tempValue;
         }
     }
 
