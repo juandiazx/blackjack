@@ -91,10 +91,10 @@ public class Deck : MonoBehaviour
             PushDealer();
             
         }
+        playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
         if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21)
         {
             habilitarBotonesInteraccion();
-            playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
             return;
         }
         
