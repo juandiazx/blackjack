@@ -89,7 +89,6 @@ public class Deck : MonoBehaviour
         {
             PushPlayer();
             PushDealer();
-            
         }
         playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
         if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21)
@@ -181,22 +180,44 @@ public class Deck : MonoBehaviour
         }
         playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
         CalculateProbabilities(); 
-
     }
 
     public void Stand()
     {
-        /*TODO: 
-         * Si estamos en la mano inicial, debemos voltear la primera carta del dealer.
-         */
+        while (dealer.GetComponent<CardHand>().points < 17)
+        {
+            PushDealer();
+        }
+        mostrarDealer();
+        
+        if (dealer.GetComponent<CardHand>().points > 21)
+        {
+            finalMessage.text = "El Dealer ha perdido, gana el Jugador";
+            creditoBanco += creditoApostado;
+        }
+        else
+        {
+            int playerScore = player.GetComponent<CardHand>().points;
+            int dealerScore = dealer.GetComponent<CardHand>().points;
 
-        /*TODO:
-         * Repartimos cartas al dealer si tiene 16 puntos o menos
-         * El dealer se planta al obtener 17 puntos o más
-         * Mostramos el mensaje del que ha ganado
-         */                
-         
+            if (player.GetComponent<CardHand>().points > dealer.GetComponent<CardHand>().points)
+            {
+                finalMessage.text = "El Jugador gana la partida";
+                creditoBanco += creditoApostado;
+            }
+            else if (playerScore < dealerScore)
+            {
+                finalMessage.text = "El Dealer gana la partida";
+                creditoBanco -= creditoApostado;
+            }
+            else
+            {
+                finalMessage.text = "La partida termina en empate";
+            }
+        }
+        inhabilitarBotonesInteraccion();
     }
+
 
     public void PlayAgain()
     {
