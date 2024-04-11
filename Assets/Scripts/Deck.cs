@@ -46,11 +46,26 @@ public class Deck : MonoBehaviour
 
     private void InitCardValues()
     {
-        /*TODO:
-         * Asignar un valor a cada una de las 52 cartas del atributo "values".
-         * En principio, la posición de cada valor se deberá corresponder con la posición de faces. 
-         * Por ejemplo, si en faces[1] hay un 2 de corazones, en values[1] debería haber un 2.
-         */
+        for (int i = 0; i < faces.Length; i++)
+        {
+            int valor;
+            switch (i % 13)
+            {
+                case 0: // As
+                    valor = 1;
+                    break;
+                case 10: // J
+                case 11: // Q
+                case 12: // K
+                    valor = 10;
+                    break;
+                default:
+                    valor = i % 13 + 1;
+                    break;
+            }
+            values[i] = valor;
+        }
+        Debug.Log("Valores de las cartas inicializados" + string.Join(", ", values));
     }
 
     private void ShuffleCards()
