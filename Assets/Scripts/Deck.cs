@@ -233,7 +233,12 @@ public class Deck : MonoBehaviour
     
     public void ApostarCreditos()
     {
-
+        if (creditoBanco > 0) // Comprobamos que tiene dinero
+        {
+            creditoBanco -= 10;
+            creditoApostado += 10;
+            credito.text = creditoBanco.ToString();
+        }
     }
 
     private void inhabilitarBotonesInteraccion()
