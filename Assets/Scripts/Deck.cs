@@ -10,7 +10,24 @@ public class Deck : MonoBehaviour
     public Button stickButton;
     public Button playAgainButton;
     public Text finalMessage;
-    public Text probMessage;
+
+    //Textos para cuando sea Blackjack
+    public Text playerBlackjack;
+    public Text dealerBlackjack;
+
+    public Text playerPuntuacion;
+    public Text dealerPuntuacion;
+    public Dropdown apostarDropdown;
+    public Text credito;
+
+    //Probabilidades
+    public Text probMore;
+    public Text probGood;
+    public Text probDealer;
+
+    //Enteros de credito
+    int creditoBanco = 1000;
+    int creditoApostado;
 
     public int[] values = new int[52];
     int cardIndex = 0;    
