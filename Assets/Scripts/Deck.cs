@@ -78,7 +78,7 @@ public class Deck : MonoBehaviour
         while (n > 1)
         {
             n--;
-            int k = Random.Range(0, n + 1);
+            int k = UnityEngine.Random.Range(0, n + 1);
             // Intercambiamos la carta en la posición k con la carta en la posición n
             tempFace = faces[k];
             faces[k] = faces[n];
