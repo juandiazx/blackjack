@@ -276,7 +276,7 @@ MonoBehaviour:
   finalMessage: {fileID: 1167008771}
   playerPuntuacion: {fileID: 1735581384}
   dealerPuntuacion: {fileID: 692146450}
-  apostarDropdown: {fileID: 0}
+  apostarDropdown: {fileID: 1231542736}
   credito: {fileID: 248877182}
   probMore: {fileID: 1012088469}
   probGood: {fileID: 2002327987}
