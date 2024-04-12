@@ -92,6 +92,7 @@ public class Deck : MonoBehaviour
             PushPlayer();
             PushDealer();
         }
+        ApostarCreditos();
         playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
         if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21)
         {
@@ -103,7 +104,7 @@ public class Deck : MonoBehaviour
 
         if (player.GetComponent<CardHand>().points == 21){
             quien = "Jugador";
-            creditoBanco += 2 * creditoApostado;
+            ganarPartidaCredito();
         }
             finalMessage.text = "El " + quien+ " ha hecho Blackjack, gana la partida";
             inhabilitarBotonesInteraccion();
@@ -175,7 +176,7 @@ public class Deck : MonoBehaviour
         if (player.GetComponent<CardHand>().points == 21)
         {
             finalMessage.text = "El Jugador ha hecho Blackjack, gana la partida";
-            creditoBanco += 2 * creditoApostado;
+            ganarPartidaCredito();
             inhabilitarBotonesInteraccion();
             mostrarDealer();
         }
@@ -194,7 +195,7 @@ public class Deck : MonoBehaviour
         if (dealer.GetComponent<CardHand>().points > 21)
         {
             finalMessage.text = "El Dealer ha perdido, gana el Jugador";
-            creditoBanco += 2 * creditoApostado;
+            ganarPartidaCredito();
         }
         else
         {
@@ -204,7 +205,7 @@ public class Deck : MonoBehaviour
             if (player.GetComponent<CardHand>().points > dealer.GetComponent<CardHand>().points)
             {
                 finalMessage.text = "El Jugador gana la partida";
-                creditoBanco += 2 * creditoApostado;
+                ganarPartidaCredito();
             }
             else if (playerScore < dealerScore)
             {
@@ -213,6 +214,7 @@ public class Deck : MonoBehaviour
             else
             {
                 finalMessage.text = "La partida termina en empate";
+                empatarPartidaCredito();
             }
         }
         inhabilitarBotonesInteraccion();
@@ -235,11 +237,18 @@ public class Deck : MonoBehaviour
     
     public void ApostarCreditos()
     {
-        if (creditoBanco > 0) // Comprobamos que tiene dinero
+        if (creditoBanco > 0)
         {
-            creditoBanco -= 10;
-            creditoApostado += 10;
+            string labelText = GameObject.Find("Credits").transform.Find("Label").GetComponent<TextMeshProUGUI>().text;
+            creditoApostado = int.Parse(labelText.Substring(0, 3));
+            if(creditoApostado > creditoBanco)
+            {
+                creditoApostado = creditoBanco;
+            }
+            creditoBanco -= creditoApostado;
             credito.text = creditoBanco.ToString();
+        }else{
+            creditoApostado = 0;
         }
     }
 
