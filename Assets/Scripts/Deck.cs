@@ -248,16 +248,28 @@ public class Deck : MonoBehaviour
         hitButton.interactable = false;
         stickButton.interactable = false;
         playAgainButton.interactable = true;
+        apostarDropdown.interactable = true;
     }
     private void habilitarBotonesInteraccion()
     {
         hitButton.interactable = true;
         stickButton.interactable = true;
         playAgainButton.interactable = false;
+        apostarDropdown.interactable = false;
     }
     private void mostrarDealer()
     {
         dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
         dealerPuntuacion.text = dealer.GetComponent<CardHand>().points.ToString();
+    }
+    private void ganarPartidaCredito()
+    {
+        creditoBanco += 2 * creditoApostado;
+        credito.text = creditoBanco.ToString();
+    }
+    private void empatarPartidaCredito()
+    {
+        creditoBanco += creditoApostado;
+        credito.text = creditoBanco.ToString();
     }
 }
