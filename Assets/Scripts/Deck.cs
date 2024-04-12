@@ -92,6 +92,7 @@ public class Deck : MonoBehaviour
             PushPlayer();
             PushDealer();
         }
+        CalculateProbabilities();
         ApostarCreditos();
         playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
         if (player.GetComponent<CardHand>().points != 21 && dealer.GetComponent<CardHand>().points != 21)
@@ -115,30 +116,82 @@ public class Deck : MonoBehaviour
     {
         CardHand playerHand = player.GetComponent<CardHand>();
         CardHand dealerHand = dealer.GetComponent<CardHand>();
-
         int playerScore = playerHand.points;
         int dealerScore = dealerHand.points;
 
         // Calcular la probabilidad de que el crupier tenga una puntuación mayor que la del jugador
         // Esto implica tener en cuenta la carta oculta del crupier y las cartas del jugador
-        // Si el jugador tiene Blackjack, la probabilidad es 0, ya que ganaría automáticamente
         float probDealerWin = 0f;
         if (playerScore != 21)
         {
-            // Lógica para calcular la probabilidad
+            int dealerHiddenCardValue = dealerHand.cards[0].GetComponent<CardModel>().value;
+
+            int dealerMaxScore = dealerScore + (dealerHiddenCardValue == 11 ? 10 : 0); // Asumiendo que la carta oculta es un As
+
+            int remainingCards = 52 - cardIndex;
+            int cardsHigherThanPlayer = 0;
+
+            for (int i = cardIndex; i < faces.Length; i++)
+            {
+                int cardValue = values[i] == 11 ? 10 : values[i]; // Si es un As, tomamos el valor 10
+                if (dealerMaxScore + cardValue > playerScore && dealerMaxScore + cardValue <= 21)
+                {
+                    cardsHigherThanPlayer++;
+                }
+            }
+
+            probDealerWin = (float)cardsHigherThanPlayer / remainingCards;
         }
 
         // Calcular la probabilidad de que el jugador obtenga una puntuación entre 17 y 21 si pide una carta adicional
-        // Esto implica tener en cuenta las cartas actuales del jugador y las posibles cartas adicionales
         float probPlayerGood = 0f;
-        // Lógica para calcular la probabilidad
+        if (playerScore < 17)
+        {
+            int cardsInRange = 0;
+
+            for (int i = cardIndex; i < faces.Length; i++)
+            {
+                int cardValue = values[i] == 11 ? 10 : values[i]; // Si es un As, tomamos el valor 10
+                if (playerScore + cardValue >= 17 && playerScore + cardValue <= 21)
+                {
+                    cardsInRange++;
+                }
+            }
+
+            probPlayerGood = (float)cardsInRange / (52 - cardIndex);
+        }
 
         // Calcular la probabilidad de que el jugador supere los 21 puntos si pide una carta adicional
-        // Esto implica tener en cuenta las cartas actuales del jugador y las posibles cartas adicionales
         float probPlayerBust = 0f;
-        // Lógica para calcular la probabilidad
+        if (playerScore < 21)
+        {
+            int cardsBust = 0;
 
-        // Actualizar los textos de probabilidades en la interfaz de usuario
+            for (int i = cardIndex; i < faces.Length; i++)
+            {
+                int cardValue = values[i] == 11 ? 10 : values[i]; // Si es un As, tomamos el valor 10
+                if (playerScore + cardValue > 21)
+                {
+                    cardsBust++;
+                }
+            }
+
+            probPlayerBust = (float)cardsBust / (52 - cardIndex);
+        }
+
+        // Ajustar la normalización para que las probabilidades no se reduzcan a 0 demasiado pronto
+        float minProb = 0.05f; // Valor mínimo para cualquier probabilidad
+
+        probDealerWin = Mathf.Max(probDealerWin, minProb);
+        probPlayerGood = Mathf.Max(probPlayerGood, minProb);
+        probPlayerBust = Mathf.Max(probPlayerBust, minProb);
+
+        // Normalizar las probabilidades para asegurar que sumen 1
+        float totalProb = probDealerWin + probPlayerGood + probPlayerBust;
+
+        probDealerWin /= totalProb;
+        probPlayerGood /= totalProb;
+        probPlayerBust /= totalProb;
         UpdateProbabilityUI(probDealerWin, probPlayerGood, probPlayerBust);
     }
 
@@ -160,13 +213,12 @@ public class Deck : MonoBehaviour
     {
         player.GetComponent<CardHand>().Push(faces[cardIndex], values[cardIndex]/*,cardCopy*/);
         cardIndex++;
-        CalculateProbabilities();
     }       
 
     public void Hit()
     {
         PushPlayer();
-
+        CalculateProbabilities();
         if (player.GetComponent<CardHand>().points > 21)
         {
             finalMessage.text = "El Jugador ha perdido, gana el Dealer";       
@@ -202,7 +254,7 @@ public class Deck : MonoBehaviour
             int playerScore = player.GetComponent<CardHand>().points;
             int dealerScore = dealer.GetComponent<CardHand>().points;
 
-            if (player.GetComponent<CardHand>().points > dealer.GetComponent<CardHand>().points)
+            if (playerScore > dealerScore)
             {
                 finalMessage.text = "El Jugador gana la partida";
                 ganarPartidaCredito();
@@ -247,7 +299,8 @@ public class Deck : MonoBehaviour
             }
             creditoBanco -= creditoApostado;
             credito.text = creditoBanco.ToString();
-        }else{
+        }
+        else{
             creditoApostado = 0;
         }
     }
