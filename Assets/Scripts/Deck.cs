@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class Deck : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class Deck : MonoBehaviour
 
     public Text playerPuntuacion;
     public Text dealerPuntuacion;
-    public Dropdown apostarDropdown;
+    public TMP_Dropdown apostarDropdown;
     public Text credito;
 
     //Probabilidades
@@ -29,9 +31,9 @@ public class Deck : MonoBehaviour
     int cardIndex = 0;    
        
     private void Awake()
-    {    
+    {
         inhabilitarBotonesInteraccion();
-        InitCardValues();        
+        InitCardValues();   
     }
 
     private void Start()
@@ -147,7 +149,6 @@ public class Deck : MonoBehaviour
         probMore.text = (probPlayerBust * 100).ToString("F2") + "%";
     }
 
-
     void PushDealer()
     {
         dealer.GetComponent<CardHand>().Push(faces[cardIndex],values[cardIndex]);
@@ -224,6 +225,7 @@ public class Deck : MonoBehaviour
         finalMessage.text = "";
         playerPuntuacion.text = "";
         dealerPuntuacion.text = "";
+
         player.GetComponent<CardHand>().Clear();
         dealer.GetComponent<CardHand>().Clear();          
         cardIndex = 0;
