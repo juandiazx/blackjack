@@ -219,21 +219,21 @@ public class Deck : MonoBehaviour
     {
         PushPlayer();
         CalculateProbabilities();
-        if (player.GetComponent<CardHand>().points > 21)
+        int playerPoints = player.GetComponent<CardHand>().points;
+        if (playerPoints > 21)
         {
             finalMessage.text = "El Jugador ha perdido, gana el Dealer";       
             inhabilitarBotonesInteraccion();
             mostrarDealer();
         }
-        if (player.GetComponent<CardHand>().points == 21)
+        if (playerPoints == 21)
         {
             finalMessage.text = "El Jugador ha hecho Blackjack, gana la partida";
             ganarPartidaCredito();
             inhabilitarBotonesInteraccion();
             mostrarDealer();
         }
-        playerPuntuacion.text = player.GetComponent<CardHand>().points.ToString();
-        CalculateProbabilities(); 
+        playerPuntuacion.text = playerPoints.ToString();
     }
 
     public void Stand()
